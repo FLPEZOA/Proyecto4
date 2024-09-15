@@ -1,0 +1,239 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Hotel Reservations API",
+        "version": "1.0.0",
+        "description": "API para gestionar reservas en hoteles"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000/api"
+        }
+    ],
+    "paths": {
+        "/reservations": {
+            "post": {
+                "summary": "Crear una nueva reserva",
+                "operationId": "createReservation",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Reservation"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Reserva creada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Reservation"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error en la solicitud"
+                    }
+                }
+            }
+        },
+        "get": {
+            "summary": "Obtener todas las reservas",
+            "operationId": "getAllReservations",
+            "responses": {
+                "200": {
+                    "description": "Lista de reservas",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Reservation"
+                                }
+                            }
+                        }
+                    }
+                },
+                "500": {
+                    "description": "Error en el servidor"
+                }
+            }
+        }
+    },
+    "/reservations/{id}": {
+        "get": {
+            "summary": "Obtener una reserva específica",
+            "operationId": "getReservationById",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID de la reserva",
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Reserva encontrada",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Reservation"
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "Reserva no encontrada"
+                },
+                "500": {
+                    "description": "Error en el servidor"
+                }
+            }
+        },
+        "put": {
+            "summary": "Actualizar información de una reserva",
+            "operationId": "updateReservation",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID de la reserva",
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Reservation"
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "Reserva actualizada",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Reservation"
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "Reserva no encontrada"
+                },
+                "400": {
+                    "description": "Error en la actualización"
+                }
+            }
+        },
+        "delete": {
+            "summary": "Eliminar una reserva específica",
+            "operationId": "deleteReservation",
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID de la reserva",
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "Reserva eliminada"
+                },
+                "404": {
+                    "description": "Reserva no encontrada"
+                },
+                "500": {
+                    "description": "Error en el servidor"
+                }
+            }
+        }
+    },
+    "/reservations/search": {
+        "get": {
+            "summary": "Buscar reservas por criterios",
+            "operationId": "searchReservations",
+            "parameters": [
+                {
+                    "name": "hotel",
+                    "in": "query",
+                    "required": false,
+                    "description": "Nombre del hotel",
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "checkIn",
+                    "in": "query",
+                    "required": false,
+                    "description": "Fecha de entrada en formato YYYY-MM-DD",
+                    "schema": {
+                        "type": "string",
+                        "format": "date"
+                    }
+                },
+                {
+                    "name": "checkOut",
+                    "in": "query",
+                    "required": false,
+                    "description": "Fecha de salida en formato YYYY-MM-DD",
+                    "schema": {
+                        "type": "string",
+                        "format": "date"
+                    }
+                },
+                {
+                    "name": "roomType",
+                    "in": "query",
+                    "required": false,
+                    "description": "Tipo de habitación",
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Lista de reservas que coinciden con los criterios de búsqueda",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Reservation"
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "No se encontraron reservas que coincidan con los criterios"
+                },
+                "500": {
+                    "description": "Error en el servidor"
+                }
+            }
+        }
+    }
+}
