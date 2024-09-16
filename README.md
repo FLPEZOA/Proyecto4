@@ -52,14 +52,14 @@ PORT=3000
 MONGODB_URI=mongodb://localhost:27017/hotel-reservations
 MongoDB debe estar en ejecución.
 
-      **Uso**
+## USO
 Para iniciar el servidor, ejecutar:
 
 node server.js
 
 Acceder a la API en http://localhost:3000/api.
 
-      **EndPoints**
+## Endpoints
 Crear Reserva
 Método: POST
 URL: /reservas
@@ -86,7 +86,7 @@ Buscar Reservas
 Método: GET
 URL: /reservas/search
 
-        **Parámetros de Consulta**
+## Parámetros de Consulta
 hotel: Nombre del hotel
 tipoHabitacion: Tipo de habitación
 numeroHuespedes: Número de huéspedes
