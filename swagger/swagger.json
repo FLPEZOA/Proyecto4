@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Hotel Reservations API",
+        "title": "Reservas de Hotel API",
         "version": "1.0.0",
         "description": "API para gestionar reservas en hoteles"
     },
@@ -11,16 +11,16 @@
         }
     ],
     "paths": {
-        "/reservations": {
+        "/reservas": {
             "post": {
                 "summary": "Crear una nueva reserva",
-                "operationId": "createReservation",
+                "operationId": "crearReserva",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Reservation"
+                                "$ref": "#/components/schemas/Reserva"
                             }
                         }
                     }
@@ -31,7 +31,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Reservation"
+                                    "$ref": "#/components/schemas/Reserva"
                                 }
                             }
                         }
@@ -44,7 +44,7 @@
         },
         "get": {
             "summary": "Obtener todas las reservas",
-            "operationId": "getAllReservations",
+            "operationId": "obtenerTodasLasReservas",
             "responses": {
                 "200": {
                     "description": "Lista de reservas",
@@ -53,7 +53,7 @@
                             "schema": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/Reservation"
+                                    "$ref": "#/components/schemas/Reserva"
                                 }
                             }
                         }
@@ -65,10 +65,10 @@
             }
         }
     },
-    "/reservations/{id}": {
+    "/reservas/{id}": {
         "get": {
             "summary": "Obtener una reserva específica",
-            "operationId": "getReservationById",
+            "operationId": "obtenerReservaPorId",
             "parameters": [
                 {
                     "name": "id",
@@ -86,7 +86,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Reservation"
+                                "$ref": "#/components/schemas/Reserva"
                             }
                         }
                     }
@@ -101,7 +101,7 @@
         },
         "put": {
             "summary": "Actualizar información de una reserva",
-            "operationId": "updateReservation",
+            "operationId": "actualizarReserva",
             "parameters": [
                 {
                     "name": "id",
@@ -118,7 +118,7 @@
                 "content": {
                     "application/json": {
                         "schema": {
-                            "$ref": "#/components/schemas/Reservation"
+                            "$ref": "#/components/schemas/Reserva"
                         }
                     }
                 }
@@ -129,7 +129,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Reservation"
+                                "$ref": "#/components/schemas/Reserva"
                             }
                         }
                     }
@@ -144,7 +144,7 @@
         },
         "delete": {
             "summary": "Eliminar una reserva específica",
-            "operationId": "deleteReservation",
+            "operationId": "eliminarReserva",
             "parameters": [
                 {
                     "name": "id",
@@ -169,10 +169,10 @@
             }
         }
     },
-    "/reservations/search": {
+    "/reservas/search": {
         "get": {
             "summary": "Buscar reservas por criterios",
-            "operationId": "searchReservations",
+            "operationId": "buscarReservas",
             "parameters": [
                 {
                     "name": "hotel",
@@ -184,7 +184,7 @@
                     }
                 },
                 {
-                    "name": "checkIn",
+                    "name": "fechaEntrada",
                     "in": "query",
                     "required": false,
                     "description": "Fecha de entrada en formato YYYY-MM-DD",
@@ -194,7 +194,7 @@
                     }
                 },
                 {
-                    "name": "checkOut",
+                    "name": "fechaSalida",
                     "in": "query",
                     "required": false,
                     "description": "Fecha de salida en formato YYYY-MM-DD",
@@ -204,7 +204,7 @@
                     }
                 },
                 {
-                    "name": "roomType",
+                    "name": "tipoHabitacion",
                     "in": "query",
                     "required": false,
                     "description": "Tipo de habitación",
@@ -221,7 +221,7 @@
                             "schema": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/Reservation"
+                                    "$ref": "#/components/schemas/Reserva"
                                 }
                             }
                         }
